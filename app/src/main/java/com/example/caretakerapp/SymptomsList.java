@@ -5,7 +5,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SymptomsList extends AppCompatActivity{
@@ -16,7 +16,7 @@ public class SymptomsList extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_symptoms_list)
+        setContentView(R.layout.activity_symptoms_list);
 
         recyclerView = findViewById(R.id.recycler_view);
         welcomeTextView = findViewById(R.id.welcome_text);
@@ -25,7 +25,7 @@ public class SymptomsList extends AppCompatActivity{
 
         return sendButton.setOnClickListener((v) -> {
             String question = messageEditText.getText().toString().trim();
-            Toast.makeText(this, question, Toast.LENGTH_LONG).show();
+            Toast.makeText(this,question,Toast.LENGTH_LONG).show();
         });
     }
 }
