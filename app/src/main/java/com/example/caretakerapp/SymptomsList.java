@@ -31,7 +31,7 @@ public class SymptomsList extends AppCompatActivity{
         recyclerView = findViewById(R.id.recycler_view);
         welcomeTextView = findViewById(R.id.welcome_text);
         messageEditText = findViewById(R.id.message_edit_text);
-        sendButton = findviewById(R.id.send_btn);
+        sendButton = findViewById(R.id.send_btn);
 
         //setup recycler view
         messageAdapter = new MessageAdapter(messageList);
@@ -52,7 +52,7 @@ public class SymptomsList extends AppCompatActivity{
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                messageList.add(new Message(message, sentBy));
+                messageList.add(new Message(message,sentBy));
                 messageAdapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(messageAdapter.getItemCount());
             }
