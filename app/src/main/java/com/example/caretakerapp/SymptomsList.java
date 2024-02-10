@@ -48,7 +48,7 @@ public class SymptomsList extends AppCompatActivity{
         });
     }
 
-    void addToChat(String message, String sentby){
+    void addToChat(String message, String sentBy){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -58,4 +58,4 @@ public class SymptomsList extends AppCompatActivity{
             }
         });
 
-    }
+    }}
