@@ -5,14 +5,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class SymptomsList extends AppCompatActivity{
     RecyclerView recyclerView;
@@ -21,6 +25,14 @@ public class SymptomsList extends AppCompatActivity{
     ImageButton sendButton;
     List<Message> messageList;
     MessageAdapter messageAdapter;
+
+    public static final MediaType JSON
+            = MediaType.get("application/json");
+    OkHttpClient client = new OkHttpClient();
+    private static class MediaType {
+    }
+
+    private class OkHttpClient {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +60,39 @@ public class SymptomsList extends AppCompatActivity{
         });
     }
 
-    void addToChat(String message, String sentBy){
+    void addToChat(String message, String sentBy) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                messageList.add(new Message(message,sentBy));
+                messageList.add(new Message(message, sentBy));
                 messageAdapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(messageAdapter.getItemCount());
             }
         });
+    }
 
-    }}
+    void callAPI(String question){
+        //okhttp
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("model","gpt-3.5-turbo-instruct");
+            jsonBody.put("prompt",question);
+            jsonBody.put("max_tokens",4000);
+            jsonBody.put("temperature",0);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        RequestBody body = question.create(jsonBody.toString(),JSON);
+        Request request = new Request.Builder()
+                .url("https://api.openai.com/v1/completions")
+                .header("Authorization", "Bearer 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")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new CallBack )
+    }
+
+
+    }
+}
